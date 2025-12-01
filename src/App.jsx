@@ -23,16 +23,18 @@ function sortFunction(goods, sortType, isReverse) {
   const visibleGoods = [...goods];
   const multipl = isReverse ? -1 : 1;
 
-  visibleGoods.sort((good1, good2) => {
-    switch (sortType) {
-      case SORT_ALPHA:
-        return good1.localeCompare(good2) * multipl;
-      case SORT_LENGTH:
-        return (good1.length - good2.length) * multipl;
-      default:
-        return 0;
-    }
-  });
+  if (sortType !== '') {
+    visibleGoods.sort((good1, good2) => {
+      switch (sortType) {
+        case SORT_ALPHA:
+          return good1.localeCompare(good2) * multipl;
+        case SORT_LENGTH:
+          return (good1.length - good2.length) * multipl;
+        default:
+          return 0;
+      }
+    });
+  } else if (isReverse) return visibleGoods.reverse();
 
   return visibleGoods;
 }
