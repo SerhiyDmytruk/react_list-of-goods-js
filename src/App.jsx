@@ -28,7 +28,7 @@ function sortFunction(goods, sortType, isReverse) {
       case SORT_ALPHA:
         return good1.localeCompare(good2) * multipl;
       case SORT_LENGTH:
-        return good1.length - good2.length * multipl;
+        return (good1.length - good2.length) * multipl;
       default:
         return 0;
     }
@@ -67,7 +67,7 @@ export const App = () => {
 
         <button
           type="button"
-          className={`button is-warning ${sortField !== false ? 'is-light' : ''}`}
+          className={`button is-warning ${reverseField !== true ? 'is-light' : ''}`}
           onClick={() => {
             setReverseField(prev => !prev);
           }}
@@ -75,12 +75,13 @@ export const App = () => {
           Reverse
         </button>
 
-        {reverseField !== '' && (
+        {(sortField !== '' || reverseField) && (
           <button
             type="button"
             className="button is-danger is-light"
             onClick={() => {
               setSortField('');
+              setReverseField(false);
             }}
           >
             Reset
